@@ -2,10 +2,10 @@
     "name": "express-ts-template",
     "version": "0.0.1",
     "description": "express js",
-    "main": "index.js",
+    "main": "./src/index.ts",
     "scripts": {
         "test": "jest",
-        "start": "nodemon server.js",
+        "start": "nodemon -r tsconfig-paths/register -r dotenv/config src/index",
         "prepare": "husky install"
     },
     "license": "MIT",
@@ -16,23 +16,12 @@
         "express": "^4.18.1",
         "express-async-errors": "^3.1.1",
         "express-validator": "^6.14.2",
-        "inquirer": "^8.2.4",
         "mssql": "^9.0.1",
         "prompt-sync": "^4.2.0",
         "rate-limiter-flexible": "^2.3.11",
         "sequelize": "^6.21.4",
-        "simple-node-logger": "^21.8.12"
-    },
-    "keywords": [
-        "api",
-        "expressjs",
-        "nodejs",
-        "backend",
-        "server",
-        "node server"
-    ],
-    "bin": {
-        "create-express-boilerplate": "bin/installer.js"
+        "simple-node-logger": "^21.8.12",
+        "swagger-ui-express": "^4.5.0"
     },
     "devDependencies": {
         "@tsconfig/recommended": "^1.0.1",
@@ -50,6 +39,7 @@
         "prettier": "^2.7.1",
         "supertest": "^6.1.6",
         "ts-node": "^10.9.1",
+        "tsconfig-paths": "^4.1.0",
         "typescript": "^4.8.4"
     }
 }
