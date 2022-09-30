@@ -1,6 +1,6 @@
 import express from 'express';
 import usersMiddleware from '@middlewares/users';
-import { getUsersList, getSpecificUser } from '@server/controllers/users';
+import { getUsersList, getSpecificUser } from '@controllers/users';
 
 const usersRouter = express.Router();
 

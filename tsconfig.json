@@ -24,7 +24,8 @@
             "@server/*": ["src/*"],
             "@controllers/*": ["src/controllers/*"],
             "@middlewares/*": ["src/middlewares/*"],
-            "@routes/*": ["src/routes/*"]
+            "@routes/*": ["src/routes/*"],
+            "@helpers/*": ["src/helpers/*"]
         }
     },
     "include": ["src/**/*.ts", "src/**/*.js"],

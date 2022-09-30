@@ -6,10 +6,12 @@ const app = express();
 const HOST = process.env.HOST || '0.0.0.0';
 const PORT = process.env.PORT || 5000;
 
+// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
+// Routes
 app.use('/users/', usersRouter);
 
 app.get('/', (_req: Request, res: Response) => {
