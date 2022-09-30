@@ -22,13 +22,10 @@
         "baseUrl": ".",
         "paths": {
             "@server/*": ["src/*"],
-            "@tests/*": ["__tests__/*"],
-            "@config/*": ["src/config/*"],
-            "@domain/*": ["src/domain/*"],
             "@controllers/*": ["src/controllers/*"],
             "@middlewares/*": ["src/middlewares/*"]
         }
     },
-    "include": ["src/**/*.ts", "src/**/*.js", "__tests__/**/*.ts", "__tests__/**/*.js"],
+    "include": ["src/**/*.ts", "src/**/*.js"],
     "exclude": ["node_modules", "build"]
 }
