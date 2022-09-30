@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import usersRouter from './routes/users';
+import usersRouter from '@routes/users';
 
 const app = express();
 const HOST = process.env.HOST || '0.0.0.0';
