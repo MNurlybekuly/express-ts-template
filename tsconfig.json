@@ -21,7 +21,7 @@
         "outDir": "./build",
         "baseUrl": ".",
         "paths": {
-            "@root/*": ["./"],
+            "@root/*": ["."],
             "@server/*": ["src/*"],
             "@config/*": ["src/config/*"],
             "@controllers/*": ["src/controllers/*"],

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { httpsRequest } from '@server/helpers/httpsRequest';
+import { httpsRequest } from '@helpers/httpsRequest';
 
 const hostname = process.env.BROKER_HOSTNAME;
 const contollerPath = process.env.BROKER_CONTROLLER_PATH;

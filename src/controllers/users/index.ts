@@ -21,15 +21,14 @@ export const getSpecificUser = async (req: Request, res: Response) => {
             throw new Error('invalid id provided');
         }
 
-        const sqlQuery = sqlGenerateSelectQuery(tableFields, tableName);
-        const list = await sqlRequest(sqlQuery);
-        const userInList = list.find((user) => parseInt(user.USE_CODE) === parseInt(req.params.id));
+        const sqlQuery = sqlGenerateSelectQuery(tableFields, tableName, `USE_CODE = ${req.params.id}`);
+        const user = await sqlRequest(sqlQuery);
 
-        if (!userInList) {
-            throw new Error('user does not exist');
+        if (user.length === 0) {
+            throw new Error('user does not exists');
         }
 
-        res.send(handleResponse(true, 'successfully handled', userInList));
+        res.send(handleResponse(true, 'successfully handled', user[0]));
     } catch (e: any) {
         res.send(handleResponse(false, e.message || 'unsuccessfully handled'));
     }
