@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { httpsRequest } from '@helpers/httpsRequest';
+import { handleResponse } from '@server/helpers/handleResponse';
 
 const hostname = process.env.BROKER_HOSTNAME;
 const contollerPath = process.env.BROKER_CONTROLLER_PATH;
@@ -17,7 +18,19 @@ const options = {
 export const getCallRequest = async (req: Request, res: Response) => {
     const callOptions = { ...options, path: `${contollerPath}/call/request` };
     const callData = JSON.stringify({ reason: req.body.reason });
-    const hashResponse: any = await httpsRequest(callOptions, callData);
+
+    let callHash = '';
+
+    try {
+        const hashResponse: any = await httpsRequest(callOptions, callData);
+        if (hashResponse.status === 'ERROR') {
+            throw new Error(hashResponse.message);
+        }
+
+        callHash = hashResponse.callHash;
+    } catch (e: any) {
+        res.send(handleResponse(false, e.message || 'something went wrong'));
+    }
 
     const participantOptions = { ...options, path: `${contollerPath}/participant/create` };
     const participantData = JSON.stringify({
@@ -25,9 +38,17 @@ export const getCallRequest = async (req: Request, res: Response) => {
         iin: req.body.iin,
         name: req.body.name,
         surname: req.body.surname,
-        callHash: hashResponse.callHash,
+        callHash: callHash,
     });
 
-    const participantResponse = await httpsRequest(participantOptions, participantData);
-    res.send(participantResponse);
+    try {
+        const participantResponse: any = await httpsRequest(participantOptions, participantData);
+        if (participantResponse.status === 'ERROR') {
+            throw new Error(participantResponse.message);
+        }
+
+        res.send(participantResponse);
+    } catch (e: any) {
+        res.send(handleResponse(false, e.message || 'something went wrong'));
+    }
 };
