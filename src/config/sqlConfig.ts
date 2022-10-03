@@ -9,6 +9,7 @@ export const sqlConfig = {
         },
         options: {
             enableArithAbort: true,
+            encrypt: false,
         },
     },
 };

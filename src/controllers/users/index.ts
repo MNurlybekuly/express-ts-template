@@ -1,12 +1,17 @@
 import { Request, Response } from 'express';
+import { sqlGenerateSelectQuery, sqlRequest } from '@helpers/sqlHelpers';
 import { handleResponse } from '@helpers/handleResponse';
+
+const tableName = 'ST_USER';
+const tableFields = ['USE_CODE', 'USE_NAME'];
 
 export const getUsersList = async (_req: Request, res: Response) => {
     try {
-        const list = await 'All users page';
+        const sqlQuery = sqlGenerateSelectQuery(tableFields, tableName);
+        const list = await sqlRequest(sqlQuery);
         res.send(handleResponse(true, 'successfully handled', list));
-    } catch (e) {
-        res.send(handleResponse(false, 'unsuccessfully handled'));
+    } catch (e: any) {
+        res.send(handleResponse(false, e.message || 'unsuccessfully handled'));
     }
 };
 
@@ -16,9 +21,16 @@ export const getSpecificUser = async (req: Request, res: Response) => {
             throw new Error('invalid id provided');
         }
 
-        const list = await `User ${req.params.id} page`;
-        res.send(handleResponse(true, 'successfully handled', list));
-    } catch (e) {
-        res.send(handleResponse(false, 'unsuccessfully handled'));
+        const sqlQuery = sqlGenerateSelectQuery(tableFields, tableName);
+        const list = await sqlRequest(sqlQuery);
+        const userInList = list.find((user) => parseInt(user.USE_CODE) === parseInt(req.params.id));
+
+        if (!userInList) {
+            throw new Error('user does not exist');
+        }
+
+        res.send(handleResponse(true, 'successfully handled', userInList));
+    } catch (e: any) {
+        res.send(handleResponse(false, e.message || 'unsuccessfully handled'));
     }
 };

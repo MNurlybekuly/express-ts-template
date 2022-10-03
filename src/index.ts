@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import cors from 'cors';
 import rateLimiterMiddleware from '@middlewares/rate-limiter';
 import swaggerRouter from '@routes/swagger-ui';
@@ -19,10 +19,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/api-docs/', swaggerRouter);
 app.use('/users/', usersRouter);
 app.use('/call/', callRouter);
-
-app.get('/', (_req: Request, res: Response) => {
-    res.send('<h1>Home page</h1>');
-});
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://${HOST}:${PORT}`);
