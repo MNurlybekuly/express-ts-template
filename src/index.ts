@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import rateLimiterMiddleware from '@middlewares/rate-limiter';
+import swaggerRouter from '@routes/swagger-ui';
 import usersRouter from '@routes/users';
 import callRouter from '@routes/call';
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
+app.use('/api-docs/', swaggerRouter);
 app.use('/users/', usersRouter);
 app.use('/call/', callRouter);
 

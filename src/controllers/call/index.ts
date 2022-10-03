@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { httpRequest } from '@helpers/httpRequest';
+import { httpsRequest } from '@server/helpers/httpsRequest';
 
 const hostname = process.env.BROKER_HOSTNAME;
-const contollerPath = `${process.env.BROKER_CONTROLLER_PATH}`;
+const contollerPath = process.env.BROKER_CONTROLLER_PATH;
 const auth = `${process.env.BROKER_USERNAME}:${process.env.BROKER_PASSWORD}`;
 
 const options = {
@@ -17,7 +17,7 @@ const options = {
 export const getCallRequest = async (req: Request, res: Response) => {
     const callOptions = { ...options, path: `${contollerPath}/call/request` };
     const callData = JSON.stringify({ reason: req.body.reason });
-    const hashResponse: any = await httpRequest(callOptions, callData);
+    const hashResponse: any = await httpsRequest(callOptions, callData);
 
     const participantOptions = { ...options, path: `${contollerPath}/participant/create` };
     const participantData = JSON.stringify({
@@ -28,6 +28,6 @@ export const getCallRequest = async (req: Request, res: Response) => {
         callHash: hashResponse.callHash,
     });
 
-    const participantResponse = await httpRequest(participantOptions, participantData);
+    const participantResponse = await httpsRequest(participantOptions, participantData);
     res.send(participantResponse);
 };

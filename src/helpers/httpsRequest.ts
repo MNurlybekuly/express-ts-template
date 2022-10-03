@@ -2,7 +2,7 @@ import https from 'https';
 
 type paramsType = string | https.RequestOptions | URL;
 
-export const httpRequest = (params: paramsType, postData?: any) => {
+export const httpsRequest = (params: paramsType, postData?: any) => {
     return new Promise((resolve, reject) => {
         const req = https.request(params, (res) => {
             // reject on bad status

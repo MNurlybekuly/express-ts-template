@@ -21,13 +21,14 @@
         "outDir": "./build",
         "baseUrl": ".",
         "paths": {
+            "@root/*": ["./"],
             "@server/*": ["src/*"],
+            "@config/*": ["src/config/*"],
             "@controllers/*": ["src/controllers/*"],
             "@middlewares/*": ["src/middlewares/*"],
             "@routes/*": ["src/routes/*"],
             "@helpers/*": ["src/helpers/*"]
-        },
-        "typeRoots": ["./src/types/express/index.d.ts", "./node_modules/@types"]
+        }
     },
     "include": ["src/**/*.ts", "src/**/*.js"],
     "exclude": ["node_modules", "build"]
