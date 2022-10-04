@@ -10,17 +10,10 @@
     "prepare": "husky install && chmod ug+x .husky/*"
   },
   "lint-staged": {
-    "linters": {
-      "src/**/*.{js,ts,css,scss,sass,html}": [
-        "lint",
-        "prettier --write"
-      ],
-      "ignore": [
-        "node_modules",
-        "dist",
-        "package-lock.json"
-      ]
-    }
+    "src/**/*.{js,ts}": [
+      "prettier --write",
+      "npm run lint"
+    ]
   },
   "license": "MIT",
   "dependencies": {
