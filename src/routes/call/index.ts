@@ -1,5 +1,5 @@
 import express from 'express'
-import { getCallRequest } from '@server/controllers/call'
+import { getCallRequest } from '@controllers/call'
 
 const callRouter = express.Router()
 
@@ -63,6 +63,8 @@ const callRouter = express.Router()
  *             schema:
  *               $ref: '#/components/schemas/DefaultError'
  */
-callRouter.post('/request', getCallRequest)
+callRouter.post('/request', (req, res) => {
+  void getCallRequest(req, res)
+})
 
 export { callRouter }

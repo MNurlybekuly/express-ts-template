@@ -6,7 +6,7 @@ const rateLimiter = new RateLimiterMemory({
   duration: 1
 })
 
-const rateLimiterMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const rateLimiterMiddleware = (req: Request, res: Response, next: NextFunction): void => {
   rateLimiter
     .consume(req.ip, 2)
     .then(() => {

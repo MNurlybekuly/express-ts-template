@@ -36,7 +36,9 @@ const usersRouter = express.Router()
  *             schema:
  *               $ref: '#/components/schemas/DefaultError'
  */
-usersRouter.get('/', getUsersList)
+usersRouter.get('/', (req, res) => {
+  void getUsersList(req, res)
+})
 
 /**
  * @swagger
@@ -110,6 +112,8 @@ usersRouter.get('/', getUsersList)
  *             schema:
  *               $ref: '#/components/schemas/DefaultError'
  */
-usersRouter.get('/:id', getSpecificUser)
+usersRouter.get('/:id', (req, res) => {
+  void getSpecificUser(req, res)
+})
 
 export { usersRouter }

@@ -2,16 +2,16 @@ import https from 'https'
 
 type paramsType = string | https.RequestOptions | URL
 
-export const httpsRequest = async (params: paramsType, postData?: any) => {
+export const httpsRequest = async (params: paramsType, postData?: any): Promise<any> => {
   return await new Promise((resolve, reject) => {
     const req = https.request(params, (res) => {
       // reject on bad status
-      if (res.statusCode < 200 || res.statusCode >= 300) {
-        return reject(new Error('statusCode=' + res.statusCode))
+      if (res.statusCode !== undefined && (res.statusCode < 200 || res.statusCode >= 300)) {
+        return reject(new Error(`statusCode= ${res.statusCode}`))
       }
 
       // cumulate data
-      let body = []
+      let body: any[] = []
       res.on('data', (chunk) => {
         body.push(chunk)
       })

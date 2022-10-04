@@ -2,9 +2,12 @@ import { Request, Response } from 'express'
 import { httpsRequest } from '@helpers/httpsRequest'
 import { handleResponse } from '@helpers/handleResponse'
 
-const hostname = process.env.BROKER_HOSTNAME
-const contollerPath = process.env.BROKER_CONTROLLER_PATH
-const auth = `${process.env.BROKER_USERNAME}:${process.env.BROKER_PASSWORD}`
+const hostname = process.env.BROKER_HOSTNAME !== undefined ? process.env.BROKER_HOSTNAME : '127.0.0.1'
+const contollerPath =
+  process.env.BROKER_CONTROLLER_PATH !== undefined ? process.env.BROKER_CONTROLLER_PATH : '/controllers'
+const username = process.env.BROKER_USERNAME !== undefined ? process.env.BROKER_USERNAME : 'username'
+const password = process.env.BROKER_PASSWORD !== undefined ? process.env.BROKER_PASSWORD : 'password'
+const auth = `${username}:${password}`
 
 const options = {
   hostname,
@@ -15,7 +18,7 @@ const options = {
   auth
 }
 
-export const getCallRequest = async (req: Request, res: Response) => {
+export const getCallRequest = async (req: Request, res: Response): Promise<void> => {
   const callOptions = { ...options, path: `${contollerPath}/call/request` }
   const callData = JSON.stringify({ reason: req.body.reason })
 
@@ -29,7 +32,8 @@ export const getCallRequest = async (req: Request, res: Response) => {
 
     callHash = hashResponse.callHash
   } catch (e: any) {
-    res.send(handleResponse(false, e.message || 'something went wrong'))
+    const message = e.message !== undefined ? e.message : 'something went wrong'
+    res.send(handleResponse(false, message))
   }
 
   const participantOptions = { ...options, path: `${contollerPath}/participant/create` }
@@ -49,6 +53,7 @@ export const getCallRequest = async (req: Request, res: Response) => {
 
     res.send(participantResponse)
   } catch (e: any) {
-    res.send(handleResponse(false, e.message || 'something went wrong'))
+    const message = e.message !== undefined ? e.message : 'something went wrong'
+    res.send(handleResponse(false, message))
   }
 }
