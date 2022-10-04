@@ -1,7 +1,7 @@
-import express from 'express';
-import { getUsersList, getSpecificUser } from '@controllers/users';
+import express from 'express'
+import { getUsersList, getSpecificUser } from '@controllers/users'
 
-const usersRouter = express.Router();
+const usersRouter = express.Router()
 
 /**
  * @swagger
@@ -36,7 +36,7 @@ const usersRouter = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/DefaultError'
  */
-usersRouter.get('/', getUsersList);
+usersRouter.get('/', getUsersList)
 
 /**
  * @swagger
@@ -110,6 +110,6 @@ usersRouter.get('/', getUsersList);
  *             schema:
  *               $ref: '#/components/schemas/DefaultError'
  */
-usersRouter.get('/:id', getSpecificUser);
+usersRouter.get('/:id', getSpecificUser)
 
-export { usersRouter };
+export { usersRouter }

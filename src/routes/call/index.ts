@@ -1,7 +1,7 @@
-import express from 'express';
-import { getCallRequest } from '@server/controllers/call';
+import express from 'express'
+import { getCallRequest } from '@server/controllers/call'
 
-const callRouter = express.Router();
+const callRouter = express.Router()
 
 /**
  * @swagger
@@ -63,6 +63,6 @@ const callRouter = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/DefaultError'
  */
-callRouter.post('/request', getCallRequest);
+callRouter.post('/request', getCallRequest)
 
-export { callRouter };
+export { callRouter }
