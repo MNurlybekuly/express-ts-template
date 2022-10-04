@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { httpsRequest } from '@helpers/httpsRequest';
-import { handleResponse } from '@server/helpers/handleResponse';
+import { handleResponse } from '@helpers/handleResponse';
+import { sqlRequest } from '@helpers/sqlHelpers';
 
 const hostname = process.env.BROKER_HOSTNAME;
 const contollerPath = process.env.BROKER_CONTROLLER_PATH;
