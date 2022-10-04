@@ -5,6 +5,7 @@
     "main": "./src/index.ts",
     "scripts": {
         "test": "jest",
+        "lint": "eslint",
         "start": "nodemon -r tsconfig-paths/register -r dotenv/config src/index",
         "prepare": "husky install"
     },
