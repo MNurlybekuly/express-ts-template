@@ -6,15 +6,11 @@ import rateLimiterMiddleware from '@middlewares/rate-limiter'
 import { callRouter, usersRouter } from '@routes/index'
 
 const app = express()
-const ENV = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : 'development'
 const HOST = process.env.HOST !== undefined ? process.env.HOST : '127.0.0.1'
 const PORT = process.env.PORT !== undefined ? process.env.PORT : 5000
 
 // Middlewares
-if (ENV !== 'development') {
-  app.use(rateLimiterMiddleware)
-}
-
+app.use(rateLimiterMiddleware)
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

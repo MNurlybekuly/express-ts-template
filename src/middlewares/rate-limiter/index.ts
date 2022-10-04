@@ -2,13 +2,13 @@ import { Request, Response, NextFunction } from 'express'
 import { RateLimiterMemory } from 'rate-limiter-flexible'
 
 const rateLimiter = new RateLimiterMemory({
-  points: 6,
+  points: 10,
   duration: 1
 })
 
 const rateLimiterMiddleware = (req: Request, res: Response, next: NextFunction): void => {
   rateLimiter
-    .consume(req.ip, 2)
+    .consume(req.ip, 1)
     .then(() => {
       next()
     })
